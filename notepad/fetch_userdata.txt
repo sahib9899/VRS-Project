@@ -1,0 +1,42 @@
+FETCH ALL USER DATA FROM DATABASE
+
+
+
+<html>
+<head>
+	<title> User Datatable</title>
+</head>
+<body>
+<table cellspacing="5" cellpadding="4">
+	<tr>
+		<th>Name</th>
+		<th>E-mail</th>
+		<th>Phone</th>
+		<th>Password</th>
+		<th>Re-password</th>
+	</tr>
+<?php
+
+
+
+$conn = mysqli_connect("localhost", "root", "", "registration");
+if($conn-> connect_error){
+	die('Connection Failed : '.$conn->connect_error);
+} else if(1==1){
+	$fetch = "SELECT name, email, phone, password, repassword from registration";
+	$result = $conn -> query($fetch);
+
+	if ($result-> num_rows > 0) {
+		while ($row = $result -> fetch_assoc()) {
+			echo "<tr><td>".$row["name"]."</td><td>".$row["email"]."</td><td>".$row["phone"]."</td><td>".$row["password"]."</td><td>".$row["repassword"]."</td></tr>";
+		}
+	}
+}
+	else{
+		echo "0 Data result.";	
+		}
+	$conn->close();
+?>
+</table>
+</body>
+</html>
